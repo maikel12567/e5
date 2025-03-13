@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('description');
-            $table->foreignId('product_type_id')->constrained('product_types'); // Corrected
+            $table->unsignedBigInteger('product_type');
             $table->string('material');
             $table->string('production_time');
             $table->string('complexity');
             $table->string('sustainability');
             $table->string('unique_properties');
             $table->double('price');
-            $table->foreignId('review_id')->constrained('reviews'); // Corrected
+            $table->unsignedBigInteger('review_id')->nullable();
             $table->string('image');
             $table->timestamps();
         });

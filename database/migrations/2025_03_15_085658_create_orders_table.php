@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users'); // References 'id' in 'users' table
-            $table->foreignId('product_id')->constrained('products'); // References 'id' in 'products' table
-            $table->foreignId('order_status_id')->constrained('order_statuses'); // References 'id' in 'order_statuses' table
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('order_status');
             $table->timestamps();
         });
     }

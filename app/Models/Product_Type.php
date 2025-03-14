@@ -13,6 +13,8 @@ class Product_Type extends Model
         'name',
     ];
 
+    protected $table = 'product_types';
+
     public function products()
     {
         return $this->hasMany(Product::class);

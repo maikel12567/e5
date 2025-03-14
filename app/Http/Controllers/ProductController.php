@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Product;
+use App\Models\Product_Type;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,6 +16,55 @@ class ProductController extends Controller
         ]);
     }
 
+    public function overview(Request $request)
+    {
+        $query = Product::query()
+            ->leftJoin('product_types', 'products.product_type', '=', 'product_types.id')
+            ->select(
+                'products.*',
+                'product_types.name as type_name'
+            );
+
+        // Search by product name
+        if ($request->filled('search')) {
+            $query->where('products.name', 'like', '%' . $request->input('search') . '%');
+        }
+
+        // Filter by product type if provided
+        if ($request->filled('product_type')) {
+            $query->where('products.product_type', $request->input('product_type'));
+        }
+
+        // Filter by complexity (exact match)
+        if ($request->filled('complexity')) {
+            $query->where('products.complexity', $request->input('complexity'));
+        }
+
+        // Filter by sustainability (exact match)
+        if ($request->filled('sustainability')) {
+            $query->where('products.sustainability', $request->input('sustainability'));
+        }
+
+        // Order by price if provided
+        if ($request->filled('price')) {
+            $order = ($request->input('price') === 'high') ? 'desc' : 'asc';
+            $query->orderBy('products.price', $order);
+        }
+
+        $products = $query->get();
+        $productTypes = Product_Type::all();
+
+        // Fetch distinct complexity options
+        $complexityOptions = Product::select('complexity')->distinct()->pluck('complexity');
+        $sustainabilityOptions = Product::select('sustainability')->distinct()->pluck('sustainability');
+
+        return view('welcome', compact('products', 'productTypes', 'complexityOptions', 'sustainabilityOptions'));
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('products.create');

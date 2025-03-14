@@ -109,12 +109,17 @@
 
                     <h1 class="text-2xl font-bold mb-4">{{ $product->name }}</h1>
                     <p><strong>Description:</strong> {{ $product->description }}</p>
-                    <p><strong>Type:</strong> {{ $product->type_name }}</p>
-                    <p><strong>Material:</strong> {{ $product->material }}</p>
-                    <p><strong>Production time:</strong> {{ $product->production_time }}</p>
-                    <p><strong>Complexity:</strong> {{ $product->complexity }}</p>
                     <p><strong>Sustainability:</strong> {{ $product->sustainability }}</p>
-                    <p><strong>Unique properties:</strong> {{ $product->unique_properties }}</p>
+                    <div class="flex flex-row gap-3 my-4">
+                        <p class="flex flex-row gap-2"><strong><i class="fa-solid fa-puzzle-piece"></i></strong>
+                            {{ $product->complexity }}</p>
+                        <p class="flex flex-row gap-2"><strong><i class="fa-solid fa-file"></i></strong>
+                            {{ $product->type_name }}</p>
+                        <p class="flex flex-row gap-2"><strong><i class="fa-solid fa-gem"></i></strong>
+                            {{ $product->material }}</p>
+                        <p class="flex flex-row gap-2"><strong><i class="fa-solid fa-clock"></i></strong>
+                            {{ $product->production_time }}</p>
+                    </div>
                     <p class="text-lg font-semibold"><strong>Price:</strong> €{{ number_format($product->price, 2) }}
                     </p>
                 </div>

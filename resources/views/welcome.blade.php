@@ -95,7 +95,6 @@
 
 
     <script>
-        // When any input in the filter form changes, submit the form.
         document.getElementById('filterForm').addEventListener('change', function() {
             this.submit();
         });

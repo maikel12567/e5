@@ -4,27 +4,29 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use Illuminate\Support\Str;
+use App\Models\Review;
 
 class ProductFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->id ?? User::factory(),
+            'user_id' => \App\Models\User::factory(),
             'name' => fake()->word(),
-            'description' => fake()->sentence(),
-            'product_type' => fake()->numberBetween(1, 4), 
-            'material' => fake()->randomElement(['Wood', 'Metal', 'Plastic', 'Glass']),
-            'production_time' => fake()->randomElement(['1 week', '2 weeks', '1 month']),
-            'complexity' => fake()->randomElement(['Low', 'Medium', 'High']),
-            'sustainability' => fake()->randomElement(['Eco-friendly', 'Recyclable', 'Biodegradable']),
+            'description' => fake()->word(),
+            'product_type' => fake()->numberBetween(1, 4),
+            'material' => fake()->word(),
+            'production_time' => fake()->randomElement(['1-3 days', '1-2 weeks', '2-4 weeks', '4-6 weeks']), // Random selection from array
+            'complexity' => fake()->word(),
+            'sustainability' => fake()->word(),
             'unique_properties' => fake()->sentence(),
-            'price' => fake()->randomFloat(2, 10, 1000),
-            'review_id' => null, 
-            'image' => fake()->imageUrl(640, 480, 'products'),
+            'price' => fake()->randomFloat(2, 10, 500),
+            'review_id' => \App\Models\Review::factory(),
+            'image' => 'https://source.unsplash.com/640x480/?product,' . fake()->word(),
             'created_at' => now(),
             'updated_at' => now(),
         ];
     }
 }
+
+ 

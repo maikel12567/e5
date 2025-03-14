@@ -46,7 +46,11 @@ class User extends Authenticatable
         ];
     }
 
-    // In User.php model
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'user_roles');

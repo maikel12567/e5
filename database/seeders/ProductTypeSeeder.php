@@ -16,6 +16,9 @@ class ProductTypeSeeder extends Seeder
         DB::table('product_types')->insert([
             ['name' => 'Electronics', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Clothing', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Books', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Toys', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Furniture', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }

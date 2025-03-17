@@ -53,27 +53,6 @@
             </div>
         </section>
 
-        <!-- Reviews Sectie -->
-        <section class="w-full grid grid-cols-12 gap-6 mb-20">
-            <div class="col-span-12 bg-[#1a1a1a] text-white border border-[#3E3E3A] rounded-lg p-8 shadow-lg">
-                <h2 class="text-4xl font-bold mb-6">Reviews</h2>
-
-                @if ($product->review->isEmpty())
-                    <p class="text-lg">Nog geen reviews voor dit product.</p>
-                @else
-                    @foreach ($product->review as $review)
-                        <div class="border-b border-[#3E3E3A] py-4">
-                            <h3 class="text-2xl font-semibold">{{ $review->title }}</h3>
-                            <div class="text-yellow-400 text-lg mb-2">
-                                @for ($i = 0; $i < $review->score; $i++)
-                                    ⭐
-                                @endfor
-                            </div>
-                            <p class="text-lg">{{ $review->description }}</p>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-        </section>
+       
     </section>
 </x-guest-layout>

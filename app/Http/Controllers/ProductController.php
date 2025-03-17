@@ -110,10 +110,10 @@ class ProductController extends Controller
 
     public function showhome($id)
     {
-        $product = Product::with('review')->findOrFail($id);
+        $product = Product::findOrFail($id);
+
         return view('show', compact('product'));
     }
-    
 
     public function edit($id)
     {

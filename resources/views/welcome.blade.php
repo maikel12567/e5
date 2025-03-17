@@ -124,8 +124,8 @@
                 <div class="flex flex-row justify-between items-center">
                     <p class="text-lg font-semibold"><strong>Price:</strong> €{{ number_format($product->price, 2) }}
                     </p>
-                    <button class="bg-blue-500 text-white px-4 py-2 rounded">show more</button>
-                </div>
+                    <a href="{{ route('show', $product->id) }}" class="text-blue-500 hover:underline">Bekijken</a>
+                    </div>
             </div>
             @endforeach
         </section>

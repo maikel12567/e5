@@ -61,10 +61,6 @@ class ProductController extends Controller
         return view('welcome', compact('products', 'productTypes', 'complexityOptions', 'sustainabilityOptions'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('products.create');
@@ -111,6 +107,13 @@ class ProductController extends Controller
 
         return view('products.show', compact('product'));
     }
+
+    public function showhome($id)
+    {
+        $product = Product::with('review')->findOrFail($id);
+        return view('show', compact('product'));
+    }
+    
 
     public function edit($id)
     {

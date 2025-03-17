@@ -28,10 +28,9 @@
                                             <span class="text-gray-500">Geen afbeelding</span>
                                         @endif
                                     </td>
-                                    <td class="border border-gray-300 grid px-4 py-2">
-                                        <a href="{{ route('products.show', $product->id) }}" class="text-blue-500 hover:underline">Bekijken</a>
-                                        <a href="{{ route('products.edit', $product->id) }}" class="text-yellow-500 hover:underline">Bewerken</a>
-                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
+                                    <td class="px-4 py-2">
+                                        <a href="{{ route('admin.product.edit', $product->id) }}" class="text-yellow-500 hover:underline">Bewerken</a>
+                                        <form action="{{ route('admin.product.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
@@ -44,7 +43,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <a href="{{ route('products.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Nieuw Product</a>
+                    <a href="{{ route('admin.product.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Nieuw Product</a>
                 </div>
             </div>
         </div>

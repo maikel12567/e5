@@ -25,9 +25,8 @@
                                     @endforeach
                                     </td>
                                     <td class="border border-gray-300 grid px-4 py-2">
-                                        <a href="" class="text-blue-500 hover:underline">Bekijken</a>
-                                        <a href="" class="text-yellow-500 hover:underline">Bewerken</a>
-                                        <form action="" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
+                                        <a href="{{ route('admin.user.edit', $user->id) }}" class="text-yellow-500 hover:underline">Bewerken</a>
+                                        <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:underline">Verwijderen</button>
@@ -40,7 +39,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <a href="" class="bg-blue-500 text-white px-4 py-2 rounded">new user</a>
+                    <a href="{{ route('admin.user.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">new user</a>
                 </div>
             </div>
         </div>

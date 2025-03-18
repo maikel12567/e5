@@ -112,10 +112,13 @@ class ProductController extends Controller
     public function showhome($id)
     {
         $product = Product::findOrFail($id);
+        $type = Product_type::find($product->product_type); // Oplossing
         $reviews = Review::where('product_id', $id)->get();
+        $type_name = $type->name;
 
-        return view('show', compact('product', 'reviews'));
+        return view('show', compact('product', 'reviews', 'type_name'));
     }
+
 
 
     public function edit($id)

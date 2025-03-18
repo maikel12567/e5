@@ -42,7 +42,7 @@
                         <strong>Complexity:</strong> {{ $product->complexity }}
                     </p>
                     <p class="flex items-center gap-2"><i class="fa-solid fa-file"></i> <strong>Type:</strong>
-                        {{ $product->type_name }}</p>
+                        {{ $type_name }}</p>
                     <p class="flex items-center gap-2"><i class="fa-solid fa-gem"></i> <strong>Material:</strong>
                         {{ $product->material }}</p>
                     <p class="flex items-center gap-2"><i class="fa-solid fa-clock"></i> <strong>Production

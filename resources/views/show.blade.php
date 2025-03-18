@@ -59,7 +59,8 @@
 
         <!-- Reviews Sectie -->
         <section class="w-full grid grid-cols-12 gap-6 mb-20">
-            <div class="col-span-12 bg-[#1a1a1a] text-white border border-[#3E3E3A] rounded-lg p-8 shadow-lg">
+            <div
+                class="col-span-10 col-start-2 px-5 pt-5 pb-3 border-[#3E3E3A] text-white border rounded-sm text-sm leading-normal">
                 <h2 class="text-4xl font-bold mb-6">Reviews</h2>
                 @if ($reviews->isEmpty())
                     <p class="text-lg">Nog geen reviews voor dit product.</p>
@@ -69,7 +70,7 @@
                             <h3 class="text-2xl font-semibold">{{ $review->title }}</h3>
                             <div class="text-yellow-400 text-lg mb-2">
                                 @for ($i = 0; $i < $review->score; $i++)
-                                    ⭐
+                                    <i class="fa-solid fa-star"></i>
                                 @endfor
                             </div>
                             <p class="text-lg">{{ $review->description }}</p>

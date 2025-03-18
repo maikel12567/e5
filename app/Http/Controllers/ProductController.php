@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Product_Type;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -110,10 +111,12 @@ class ProductController extends Controller
 
     public function showhome($id)
     {
-        $product = Product::with('review')->findOrFail($id);
-        return view('show', compact('product'));
+        $product = Product::findOrFail($id);
+        $reviews = Review::where('product_id', $id)->get();
+
+        return view('show', compact('product', 'reviews'));
     }
-    
+
 
     public function edit($id)
     {

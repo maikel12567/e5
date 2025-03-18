@@ -30,8 +30,8 @@
         <!-- Product Details -->
         <section class="w-full grid grid-cols-12 gap-6 mb-20">
             <div class="col-span-12 bg-[#222] text-white border border-[#3E3E3A] rounded-lg p-8 shadow-lg">
-                <img src="https://picsum.photos/seed/{{ $product->id }}/1920/600" 
-                     alt="Product afbeelding" 
+                <img src="https://picsum.photos/seed/{{ $product->id }}/1920/600"
+                     alt="Product afbeelding"
                      class="w-full h-[500px] object-cover rounded-lg mb-6">
 
                 <h1 class="text-5xl font-bold mb-6">{{ $product->name }}</h1>
@@ -47,7 +47,7 @@
 
                 <div class="flex justify-between items-center mt-8">
                     <p class="text-3xl font-bold">€{{ number_format($product->price, 2) }}</p>
-                    <a href="{{ route('welcome') }}" 
+                    <a href="{{ route('welcome') }}"
                        class="text-lg text-blue-400 hover:text-blue-300 transition">← Terug naar overzicht</a>
                 </div>
             </div>
@@ -57,11 +57,10 @@
         <section class="w-full grid grid-cols-12 gap-6 mb-20">
             <div class="col-span-12 bg-[#1a1a1a] text-white border border-[#3E3E3A] rounded-lg p-8 shadow-lg">
                 <h2 class="text-4xl font-bold mb-6">Reviews</h2>
-
-                @if ($product->review->isEmpty())
+                @if ($reviews->isEmpty())
                     <p class="text-lg">Nog geen reviews voor dit product.</p>
                 @else
-                    @foreach ($product->review as $review)
+                    @foreach ($reviews as $review)
                         <div class="border-b border-[#3E3E3A] py-4">
                             <h3 class="text-2xl font-semibold">{{ $review->title }}</h3>
                             <div class="text-yellow-400 text-lg mb-2">
@@ -73,6 +72,7 @@
                         </div>
                     @endforeach
                 @endif
+
             </div>
         </section>
     </section>

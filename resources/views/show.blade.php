@@ -29,9 +29,9 @@
 
         <!-- Product Details -->
         <section class="w-full grid grid-cols-12 gap-6 mb-20">
-            <div class="col-span-12 bg-black text-white border border-[#3E3E3A] rounded-lg p-8 shadow-lg">
+            <div class="col-span-10 col-start-2 bg-black text-white border border-[#3E3E3A] rounded-lg p-8 shadow-lg">
                 <img src="https://picsum.photos/seed/{{ $product->id }}/1920/600" alt="Product afbeelding"
-                    class="w-full h-[500px] object-cover rounded-lg mb-6">
+                    class="w-auto h-[500px] object-cover rounded-lg mb-6">
 
                 <h1 class="text-5xl font-bold mb-6">{{ $product->name }}</h1>
                 <p class="text-xl mb-6"><strong>Description:</strong> {{ $product->description }}</p>
@@ -39,7 +39,8 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-lg my-6">
                     <p class="flex items-center gap-2"><i class="fa-solid fa-puzzle-piece"></i>
-                        <strong>Complexity:</strong> {{ $product->complexity }}</p>
+                        <strong>Complexity:</strong> {{ $product->complexity }}
+                    </p>
                     <p class="flex items-center gap-2"><i class="fa-solid fa-file"></i> <strong>Type:</strong>
                         {{ $product->type_name }}</p>
                     <p class="flex items-center gap-2"><i class="fa-solid fa-gem"></i> <strong>Material:</strong>

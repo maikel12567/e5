@@ -19,7 +19,6 @@ class Product extends Model
         'sustainability',
         'unique_properties',
         'price',
-        'review_id',
         'image',
     ];
 

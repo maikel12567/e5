@@ -21,7 +21,6 @@ class ProductFactory extends Factory
             'sustainability' => fake()->word(),
             'unique_properties' => fake()->sentence(),
             'price' => fake()->randomFloat(2, 10, 500),
-            'review_id' => \App\Models\Review::factory(),
             'image' => 'https://source.unsplash.com/640x480/?product,' . fake()->word(),
             'created_at' => now(),
             'updated_at' => now(),
@@ -29,4 +28,3 @@ class ProductFactory extends Factory
     }
 }
 
- 

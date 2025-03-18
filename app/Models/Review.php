@@ -13,6 +13,7 @@ class Review extends Model
         'title',
         'description',
         'score',
+        'product_id',
     ];
 
     public function products()

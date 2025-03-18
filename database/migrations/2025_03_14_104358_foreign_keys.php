@@ -28,7 +28,11 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('product_type')->references('id')->on('product_types')->onDelete('cascade');
-            $table->foreign('review_id')->references('id')->on('reviews')->onDelete('set null');
+        });
+
+        //reviews
+        Schema::table('reviews', function (Blueprint $table){
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

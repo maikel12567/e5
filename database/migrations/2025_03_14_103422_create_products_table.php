@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('sustainability');
             $table->string('unique_properties');
             $table->double('price');
-            $table->unsignedBigInteger('review_id')->nullable();
             $table->string('image');
             $table->timestamps();
         });

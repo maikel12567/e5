@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'sustainability' => fake()->word(),
             'unique_properties' => fake()->sentence(),
             'price' => fake()->randomFloat(2, 10, 500),
-            'image' => 'https://source.unsplash.com/640x480/?product,' . fake()->word(),
+            'image' => 'https://source.unsplash.com/random/640x480?sig=' . fake()->randomNumber(),
             'created_at' => now(),
             'updated_at' => now(),
         ];

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -12,9 +15,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        // Haal de orders op van de ingelogde gebruiker
+        $orders = Order::where('user_id', Auth::id())->get();        
+        
+        return view('orders.index', compact('orders'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */

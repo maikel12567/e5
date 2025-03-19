@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [ProductController::class, 'overview'])->name('welcome');
 
@@ -17,6 +18,7 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('pr
 Route::get('/products/{id}', [ProductController::class, 'showhome'])->name('show');
 Route::get('/profile/{id}', [ProductController::class, 'showUserProducts'])->name('showmore');
 
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 
 
 

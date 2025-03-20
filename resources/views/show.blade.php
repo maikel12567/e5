@@ -1,83 +1,81 @@
 <x-guest-layout>
-    <section class="w-full px-6">
-        <header class="w-full text-sm my-6 flex justify-between items-center">
-            <h2 class="text-4xl font-bold text-white flex-1">Makersmarkt</h2>
+    <section class="flex flex-col items-center justify-center container lg:px-6 sm:px-4">
+        @include('layouts.guestnav')
 
-            @if (Route::has('login'))
-                <nav class="flex items-center gap-4">
-                    @auth
-                        <a href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 border-[#3E3E3A] hover:border-gray-300 text-white border rounded-sm text-sm leading-normal transition-all duration-300">
-                            Dashboard
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 border-[#3E3E3A] hover:border-gray-300 text-white border rounded-sm text-sm leading-normal transition-all duration-300">
-                            Log in
-                        </a>
+        <section class="container mx-auto px-6 lg:px-20 py-10 bg-black text-white">
+            <!-- Breadcrumb -->
+            <nav class="text-gray-400 text-sm mb-4">
+                <a href="{{ route('welcome') }}" class="hover:text-white transition">Home</a> /
+                <span class="text-white">{{ $product->name }}</span>
+            </nav>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 border-[#3E3E3A] hover:border-gray-300 text-white border rounded-sm text-sm leading-normal transition-all duration-300">
-                                Register
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
-        </header>
-
-        <!-- Product Details -->
-        <section class="w-full grid grid-cols-12 gap-6 mb-20">
-            <div class="col-span-10 col-start-2 bg-black text-white border border-[#3E3E3A] rounded-lg p-8 shadow-lg">
-                <img src="https://picsum.photos/seed/{{ $product->id }}/1920/600" alt="Product afbeelding"
-                    class="w-auto h-[500px] object-cover rounded-lg mb-6">
-
-                <h1 class="text-5xl font-bold mb-6">{{ $product->name }}</h1>
-                <p class="text-xl mb-6"><strong>Description:</strong> {{ $product->description }}</p>
-                <p class="text-lg mb-6"><strong>Sustainability:</strong> {{ $product->sustainability }}</p>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-lg my-6">
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-puzzle-piece"></i>
-                        <strong>Complexity:</strong> {{ $product->complexity }}
-                    </p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-file"></i> <strong>Type:</strong>
-                        {{ $type_name }}</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-gem"></i> <strong>Material:</strong>
-                        {{ $product->material }}</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-clock"></i> <strong>Production
-                            Time:</strong> {{ $product->production_time }}</p>
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Product Image -->
+                <div class="relative">
+                    <img src="https://picsum.photos/seed/{{ $product->id }}/800/800"
+                        alt="Product afbeelding"
+                        class="w-full h-auto object-cover rounded-lg shadow-md border border-gray-700">
                 </div>
 
-                <div class="flex justify-between items-center mt-8">
-                    <p class="text-3xl font-bold">€{{ number_format($product->price, 2) }}</p>
-                    <a href="{{ route('welcome') }}" class="text-lg text-blue-400 hover:text-blue-300 transition">←
-                        Terug naar overzicht</a>
+                <!-- Product Info -->
+                <div class="flex flex-col">
+                    <h1 class="text-4xl font-extrabold text-white mb-4">{{ $product->name }}</h1>
+                    <p class="text-lg text-gray-300 mb-6">{{ $product->description }}</p>
+
+                    <!-- Maker info + "Zie meer" button -->
+                    <div class="flex items-center space-x-4 mb-6">
+                        <span class="text-gray-400 text-sm">Gemaakt door:</span>
+                        <span class="text-lg font-semibold text-white">{{ $maker->name }}</span>
+
+                        <a href="{{ route('showmore', $maker->id) }}"
+                            class="px-4 py-2 border border-white text-white text-sm font-semibold rounded-lg hover:bg-white hover:text-black transition">
+                            Zie meer van deze gebruiker
+                        </a>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="grid grid-cols-2 gap-6 border-t border-gray-700 pt-6">
+                        <p class="text-gray-300"><strong>Complexity:</strong> {{ $product->complexity }}</p>
+                        <p class="text-gray-300"><strong>Type:</strong> {{ $type_name }}</p>
+                        <p class="text-gray-300"><strong>Material:</strong> {{ $product->material }}</p>
+                        <p class="text-gray-300"><strong>Production Time:</strong> {{ $product->production_time }}</p>
+                    </div>
+
+                    <!-- Price & CTA Buttons -->
+                    <div class="mt-8 flex flex-col space-y-4">
+                        <span class="text-3xl font-bold text-white">€{{ number_format($product->price, 2) }}</span>
+
+                        <!-- Buy Now Button -->
+                        <a href="#"
+                            class="w-full px-6 py-3 border border-white text-white text-lg font-semibold rounded-lg text-center">
+                            Buy Now
+                        </a>
+                    </div>
                 </div>
             </div>
-        </section>
 
         <!-- Reviews Sectie -->
         <section class="w-full grid grid-cols-12 gap-6 mb-20">
             <div class="col-span-12 bg-[#1a1a1a] text-white border border-[#3E3E3A] rounded-lg p-8 shadow-lg">
                 <h2 class="text-4xl font-bold mb-6">Reviews</h2>
                 @if ($reviews->isEmpty())
-                    <p class="text-lg">Nog geen reviews voor dit product.</p>
+                <p class="text-gray-400">Nog geen reviews voor dit product.</p>
                 @else
+                <div class="space-y-6">
                     @foreach ($reviews as $review)
-                        <div class="border-b border-[#3E3E3A] py-4">
-                            <h3 class="text-2xl font-semibold">{{ $review->title }}</h3>
-                            <div class="text-yellow-400 text-lg mb-2">
-                                @for ($i = 0; $i < $review->score; $i++)
-                                    ⭐
+                    <div class="border-b border-gray-700 pb-4">
+                        <h3 class="text-xl font-semibold text-white">{{ $review->title }}</h3>
+                        <div class="text-yellow-400 text-lg mb-2">
+                            @for ($i = 0; $i < $review->score; $i++)
+                                <i class="fa-solid fa-star"></i>
                                 @endfor
-                            </div>
-                            <p class="text-lg">{{ $review->description }}</p>
                         </div>
+                        <p class="text-gray-300">{{ $review->description }}</p>
+                    </div>
                     @endforeach
+                </div>
                 @endif
-
             </div>
         </section>
-    </section>
 </x-guest-layout>

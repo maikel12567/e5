@@ -32,8 +32,17 @@
 
                         <div>
                             <label class="block font-medium text-gray-700">Type:</label>
-                            <input type="number" name="product_type" value="{{ $product->product_type }}" class="w-full p-2 border rounded" required>
+                            <select name="product_type" class="w-full p-2 border rounded" required>
+                                <option value="">Selecteer een type</option>
+                                @foreach($types as $type)
+                                    <option value="{{ $type->id }}"
+                                        {{ isset($product) && $product->product_type == $type->id ? 'selected' : '' }}>
+                                        {{ $type->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
 
                         <div>
                             <label class="block font-medium text-gray-700">Materiaal:</label>

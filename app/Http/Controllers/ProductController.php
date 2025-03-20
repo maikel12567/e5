@@ -62,9 +62,55 @@ class ProductController extends Controller
         return view('welcome', compact('products', 'productTypes', 'complexityOptions', 'sustainabilityOptions'));
     }
 
+    public function overviewDashboard(Request $request)
+    {
+        $query = Product::query()
+            ->leftJoin('product_types', 'products.product_type', '=', 'product_types.id')
+            ->select(
+                'products.*',
+                'product_types.name as type_name'
+            );
+
+        // Search by product name
+        if ($request->filled('search')) {
+            $query->where('products.name', 'like', '%' . $request->input('search') . '%');
+        }
+
+        // Filter by product type if provided
+        if ($request->filled('product_type')) {
+            $query->where('products.product_type', $request->input('product_type'));
+        }
+
+        // Filter by complexity (exact match)
+        if ($request->filled('complexity')) {
+            $query->where('products.complexity', $request->input('complexity'));
+        }
+
+        // Filter by sustainability (exact match)
+        if ($request->filled('sustainability')) {
+            $query->where('products.sustainability', $request->input('sustainability'));
+        }
+
+        // Order by price if provided
+        if ($request->filled('price')) {
+            $order = ($request->input('price') === 'high') ? 'desc' : 'asc';
+            $query->orderBy('products.price', $order);
+        }
+
+        $products = $query->get();
+        $productTypes = Product_Type::all();
+
+        // Fetch distinct complexity options
+        $complexityOptions = Product::select('complexity')->distinct()->pluck('complexity');
+        $sustainabilityOptions = Product::select('sustainability')->distinct()->pluck('sustainability');
+
+        return view('dashboard', compact('products', 'productTypes', 'complexityOptions', 'sustainabilityOptions'));
+    }
+
     public function create()
     {
-        return view('products.create');
+        $types = Product_Type::all();
+        return view('products.create', compact('types'));
     }
 
     public function store(Request $request)
@@ -124,7 +170,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('products.edit', compact('product'));
+        $types = Product_Type::all();
+        return view('products.edit', compact('product', 'types'));
     }
 
     public function update(Request $request, $id)

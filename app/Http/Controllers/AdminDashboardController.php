@@ -28,7 +28,9 @@ class AdminDashboardController extends Controller
 
     public function productCreate()
     {
-        return view('admin.product.create');
+        return view('admin.product.create', [
+            'types' => Product_Type::all()
+        ]);
     }
 
     public function productStore(Request $request)
@@ -69,7 +71,8 @@ class AdminDashboardController extends Controller
     public function productEdit($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.product.edit', compact('product'));
+        $types = Product_Type::all();
+        return view('admin.product.edit', compact('product', 'types'));
     }
 
     public function productUpdate(Request $request, $id)

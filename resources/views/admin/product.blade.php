@@ -4,6 +4,11 @@
             <div class="p-12 bg-black border-[#3E3E3A] text-white border rounded-sm text-sm leading-normal">
                 <h1 class="text-2xl font-bold mb-4">Products</h1>
 
+                <div class="my-4">
+                    <a href="{{ route('admin.product.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Nieuw
+                        Product</a>
+                </div>
+
                 <div class="overflow-auto">
                     <table class="min-w-full border-collapse border border-gray-300">
                         <thead>
@@ -24,7 +29,7 @@
                                         €{{ number_format($product->price, 2) }}</td>
                                     <td class="border border-gray-300 px-4 py-2">
                                         @if ($product->image)
-                                            <img src="{{ asset('storage/' . $product->image) }}"
+                                            <img src="https://picsum.photos/seed/{{ $product->id }}/300/300"
                                                 alt="Product afbeelding" class="h-16 w-16 object-cover rounded">
                                         @else
                                             <span class="text-gray-500">Geen afbeelding</span>
@@ -47,10 +52,6 @@
                     </table>
                 </div>
 
-                <div class="mt-4">
-                    <a href="{{ route('admin.product.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Nieuw
-                        Product</a>
-                </div>
             </div>
         </div>
     </div>

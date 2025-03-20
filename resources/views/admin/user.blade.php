@@ -4,6 +4,11 @@
             <div class="p-12 border-[#3E3E3A] text-white border rounded-sm text-sm leading-normal">
                 <h1 class="text-2xl font-bold mb-4">Users</h1>
 
+                <div class="my-4">
+                    <a href="{{ route('admin.user.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">new
+                        user</a>
+                </div>
+
                 <div class="overflow-auto">
                     <table class="min-w-full border-collapse border border-gray-300">
                         <thead>
@@ -40,11 +45,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-
-                <div class="mt-4">
-                    <a href="{{ route('admin.user.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">new
-                        user</a>
                 </div>
             </div>
         </div>

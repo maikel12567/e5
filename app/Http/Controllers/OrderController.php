@@ -27,7 +27,7 @@ class OrderController extends Controller
 
         // Controleer of de gebruiker genoeg saldo heeft
         if ($user->credit < $product->price) {
-            return redirect()->back()->with('error', 'Je hebt niet genoeg saldo.');
+            return redirect()->back()->with('error', 'Not enough credit!');
         }
 
         // Trek het bedrag af
@@ -41,6 +41,6 @@ class OrderController extends Controller
             'order_status' => 1,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Aankoop succesvol!');
+        return redirect()->route('welcome')->with('success', 'Product bought!');
     }
 }

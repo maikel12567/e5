@@ -1,13 +1,31 @@
 <x-guest-layout>
     <section class="flex flex-col items-center justify-center container lg:px-6 sm:px-4">
     @include('layouts.guestnav')
+    @if (session('success') || session('error'))
+    <div id="alertMessage" class="w-full max-w-2xl mx-auto text-white text-center p-4 rounded-lg shadow-lg transition-opacity duration-500 ease-in-out opacity-100 
+        {{ session('success') ? 'bg-green-500' : 'bg-red-500' }}">
+        {{ session('success') ?? session('error') }}
+    </div>
+
+    <script>
+        setTimeout(() => {
+            let message = document.getElementById('alertMessage');
+            if (message) {
+                message.classList.add('opacity-0'); // Laat het vervagen
+                setTimeout(() => message.style.display = 'none', 500); // Verwijder na fade-out
+            }
+        }, 3000);
+    </script>
+@endif
+
+
 
         <section class="w-full grid grid-cols-12 gap-6  mb-20">
             <form method="GET" action="{{ route('welcome') }}" class="col-span-12 grid grid-cols-12 gap-6 w-full mb-6"
                 id="filterForm">
                 <!-- Search Bar -->
                 <div class="mb-4 col-span-12 flex flex-row gap-2">
-                    <input type="text" name="search" placeholder="Zoek producten" value="{{ request('search') }}"
+                    <input type="text" name="search" placeholder="Search products" value="{{ request('search') }}"
                         class="w-full  bg-transparent inline-block px-5 py-1.5 border-[#3E3E3A] hover:border-gray-300 text-white border rounded-sm transition-all duration-300">
                     <button type="submit"
                         class="flex flex-row gap-3 items-center px-5 py-1.5 border-[#3E3E3A] hover:border-gray-300 text-white border rounded-sm text-sm leading-normal transition-all duration-300 "><i
@@ -99,12 +117,11 @@
                     <p class="text-lg font-bold text-white">€{{ number_format($product->price, 2) }}</p>
                     <a href="{{ route('show', $product->id) }}"
                         class="px-4 py-2 border border-gray-400 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition">
-                        Bekijken
+                        See more
                     </a>
                 </div>
             </div>
             @endforeach
-
         </section>
     </section>
 

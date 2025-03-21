@@ -1,6 +1,22 @@
 <x-guest-layout>
     <section class="flex flex-col items-center justify-center container lg:px-6 sm:px-4">
         @include('layouts.guestnav')
+        @if (session('success') || session('error'))
+    <div id="alertMessage" class="w-full max-w-2xl mx-auto text-white text-center p-4 rounded-lg shadow-lg transition-opacity duration-500 ease-in-out opacity-100 
+        {{ session('success') ? 'bg-green-500' : 'bg-red-500' }}">
+        {{ session('success') ?? session('error') }}
+    </div>
+
+    <script>
+        setTimeout(() => {
+            let message = document.getElementById('alertMessage');
+            if (message) {
+                message.classList.add('opacity-0'); // Laat het vervagen
+                setTimeout(() => message.style.display = 'none', 500); // Verwijder na fade-out
+            }
+        }, 3000);
+    </script>
+@endif
 
         <section class="container mx-auto px-6 lg:px-20 py-10 bg-black text-white">
             <!-- Breadcrumb -->
@@ -25,12 +41,12 @@
 
                     <!-- Maker info + "Zie meer" button -->
                     <div class="flex items-center space-x-4 mb-6">
-                        <span class="text-gray-400 text-sm">Gemaakt door:</span>
+                        <span class="text-gray-400 text-sm">Made by:</span>
                         <span class="text-lg font-semibold text-white">{{ $maker->name }}</span>
 
                         <a href="{{ route('showmore', $maker->id) }}"
                             class="px-4 py-2 border border-white text-white text-sm font-semibold rounded-lg hover:bg-white hover:text-black transition">
-                            Zie meer van deze gebruiker
+                            See more of this user
                         </a>
                     </div>
 

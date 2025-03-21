@@ -16,56 +16,31 @@ class OrderController extends Controller
     public function index()
     {
         // Haal de orders op van de ingelogde gebruiker
-        $orders = Order::where('user_id', Auth::id())->get();        
-        
+        $orders = Order::where('user_id', Auth::id())->get();
+
         return view('orders.index', compact('orders'));
     }
-    
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function buy(Product $product)
     {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
+        // Controleer of de gebruiker genoeg saldo heeft
+        if ($user->credit < $product->price) {
+            return redirect()->back()->with('error', 'Je hebt niet genoeg saldo.');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
+        // Trek het bedrag af
+        $user->credit -= $product->price;
+        $user->save();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
+        // Maak een nieuwe order aan
+        Order::create([
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+            'order_status' => 1,
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
+        return redirect()->route('dashboard')->with('success', 'Aankoop succesvol!');
     }
 }

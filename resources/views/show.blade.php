@@ -47,10 +47,23 @@
                         <span class="text-3xl font-bold text-white">€{{ number_format($product->price, 2) }}</span>
 
                         <!-- Buy Now Button -->
-                        <a href="#"
-                            class="w-full px-6 py-3 border border-white text-white text-lg font-semibold rounded-lg text-center">
-                            Buy Now
-                        </a>
+                        @if(Auth::check())
+                            <!-- Buy Now Button for Logged-in Users -->
+                            <form action="{{ route('buy', $product->id) }}" method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="w-full px-6 py-3 border border-white text-white text-lg font-semibold rounded-lg text-center hover:bg-white hover:text-black transition">
+                                    Buy Now
+                                </button>
+                            </form>
+                        @else
+                            <!-- Login Prompt for Guests -->
+                            <a href="{{ route('login') }}"
+                                class="w-full px-6 py-3 bg-gray-700 text-white text-lg font-semibold rounded-lg text-center hover:bg-white hover:text-black transition">
+                                Log in first to buy!
+                            </a>
+                        @endif
+
                     </div>
                 </div>
             </div>

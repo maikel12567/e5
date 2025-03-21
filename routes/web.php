@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'checkUserRole:3'])->group(function () {
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('/buy/{product}', [OrderController::class, 'buy'])->name('buy');
     //product
     Route::get('/admin/product', [AdminDashboardController::class, 'productIndex'])->name('admin.product');
     Route::get('/admin/product/create', [AdminDashboardController::class, 'productCreate'])->name('admin.product.create');

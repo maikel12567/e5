@@ -1,4 +1,7 @@
-<x-app-layout>
+<x-guest-layout>
+<section class="flex flex-col items-center justify-center container lg:px-6 sm:px-4">
+
+    @include('layouts.guestnav')
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold text-white mb-6">Mijn Orders</h1>
 
@@ -34,4 +37,5 @@
             </table>
         </div>
     </div>
-</x-app-layout>
+</section>
+</x-guest-layout>

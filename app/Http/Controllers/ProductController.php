@@ -157,23 +157,23 @@ class ProductController extends Controller
     }
 
     public function showhome($id)
-{
-    $product = Product::findOrFail($id);
-    $type = Product_type::find($product->product_type);
-    $reviews = Review::where('product_id', $id)->get();
-    $type_name = $type->name;
-    $maker = User::find($product->user_id);
+    {
+        $product = Product::findOrFail($id);
+        $type = Product_type::find($product->product_type);
+        $reviews = Review::where('product_id', $id)->get();
+        $type_name = $type->name;
+        $maker = User::find($product->user_id);
 
-    return view('show', compact('product', 'reviews', 'type_name', 'maker'));
-}
+        return view('show', compact('product', 'reviews', 'type_name', 'maker'));
+    }
 
-public function showUserProducts($id)
-{
-    $user = User::findOrFail($id);
-    $products = Product::where('user_id', $id)->get();
+    public function showUserProducts($id)
+    {
+        $user = User::findOrFail($id);
+        $products = Product::where('user_id', $id)->get();
 
-    return view('showmore', compact('user', 'products'));
-}
+        return view('showmore', compact('user', 'products'));
+    }
 
 
 
